@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/09/24 14:21:22 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/09/24 23:13:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,16 @@
 #include "get_next_line.h"
 // #include "get_next_line_utils.c"
 
-#define BUFF_SIZE 2
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*s3;
-	int		i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	s3 = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (s3 == NULL)
-		return (NULL);
-	while (*s1)
-		s3[i++] = *s1++;
-	while (*s2)
-		s3[i++] = *s2++;
-	s3[i] = '\0';
-	return (s3);
-}
+#define BUFF_SIZE 42 
 
 // el arg int n no tiene sentido, solo es para las 25 lineas
-char	*fill_line(int fd, char *buff, int n)
+char	*fill_line(int fd, char *buff)
 {
 	char	*line;
 	char	*temp;
+	int		n;
 
+	n = 0;
 	line = ft_strdup("");
 	while (1)
 	{
@@ -55,18 +38,16 @@ char	*fill_line(int fd, char *buff, int n)
 		if (n == 0)
 			break ;
 		buff[n] = '\0';
-		temp = (char *)malloc(ft_strlen(line) + n + 1);
-		ft_strcpy(temp, line);
-		ft_strlcat(temp, buff, (ft_strlen(line) + n + 1));
-		free(line);
-		line = temp;
+		temp = line;
+		line = ft_strjoin(temp, buff);
+		free(temp);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
 	return (line);
 }
 
-char *split_line(char *str)
+char	*split_line(char *str)
 {
 	char	*rest;
 	int		null_position;
@@ -97,7 +78,7 @@ char	*get_next_line(int fd)
 	buff = malloc(sizeof(char) * (BUFF_SIZE + 1));
 	if (!buff)
 		return (NULL);
-	line = fill_line(fd, buff, 0);
+	line = fill_line(fd, buff);
 	free(buff);
 	if (!line)
 	{
@@ -111,9 +92,9 @@ char	*get_next_line(int fd)
 		free(line);
 		free(rest);
 		line = ft_strdup(temp);
+		free(temp);
 	}
 	rest = split_line(line);
-
 	return (line);
 }
 
@@ -121,45 +102,29 @@ void	ft_putstr(char *s)
 {
 	while (*s)
 	{
-		write(0, s, 1);
+		write(1, s, 1);
 		s++;
 	}
 }
-
 int	main(void)
 {
 	int		fd;
 	char	*result;
-
 	fd = open("test.txt", O_RDONLY);
 	if (fd == -1)
 		return (1);
-	// result = get_next_line(fd);
-	// ft_putstr(result);
-	// result = get_next_line(fd);
-	// ft_putstr(result);
-	// result = get_next_line(fd);
-	// ft_putstr(result);
-	// result = get_next_line(fd);
-	// ft_putstr(result);
-	// result = get_next_line(fd);
-	// ft_putstr(result);
-	// while (result = get_next_line(fd))
+	result = get_next_line(fd);
+	ft_putstr(result);
+	result = get_next_line(fd);
+	ft_putstr(result);
+	// while (1)
 	// {
-	// 	// result = get_next_line(fd);
-	// 	// if  (!result)
-	// 	// 	break ;
+	// 	result = get_next_line(fd);
+	// 	if  (!result)
+	// 		break ;
 	// 	ft_putstr(result);
 	// 	free(result);
 	// }
-	while (1)
-	{
-		result = get_next_line(fd);
-		if  (!result)
-			break ;
-		ft_putstr(result);
-		free(result);
-	}
 	if (close(fd) == -1)
 	{
 		write(2, "Cannot close file.\n", 19);
