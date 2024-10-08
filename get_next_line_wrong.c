@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/10/08 20:43:14 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/08 20:39:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char *fill_line(char *buff, int fd, char *chunk)
     }
     return (chunk);
 }
+
 // CREA UN PUTO SUBSTRING CON LA PARTE DERECHA Y NULL TERMINA LINE DESPUES DEL \N 
 // line tiene el substr a return
 // left tiene el substr que sobra

@@ -6,11 +6,21 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:04:10 by jterrada          #+#    #+#             */
-/*   Updated: 2024/09/24 22:35:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/08 20:25:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 
 
 // size_t	ft_strlcat(char *dest, const char *src, size_t size)
@@ -39,19 +49,43 @@
 // 	return (dest_len + src_len);
 // }
 
+char	*ft_substr(char *s, int start, int len)
+{
+	int	i;
+	char	*str;
+
+	if (!s)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (malloc(1));
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	str = malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}
+
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	d;
 
 	d = (unsigned char)c;
+	if (d == '\0')
+		return ((char *)s);
 	while (*s)
 	{
 		if (*s == d)
 			return ((char *)s);
 		s++;
 	}
-	if (d == '\0')
-		return ((char *)s);
 	return (NULL);
 }
 
@@ -74,33 +108,23 @@ char	*ft_strdup(const char *src)
 	return (dest);
 }
 
-int	ft_strlen(char *str)
-{
-	int	i;
+// size_t	ft_strcpy(char *dest, const char *src)
+// {
+// 	size_t	i;
+// 	size_t	len;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-size_t	ft_strcpy(char *dest, const char *src)
-{
-	size_t	i;
-	size_t	len;
-
-	len = 0;
-	while (src[len])
-		len++;
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (len);
-}
+// 	len = 0;
+// 	while (src[len])
+// 		len++;
+// 	i = 0;
+// 	while (src[i])
+// 	{
+// 		dest[i] = src[i];
+// 		i++;
+// 	}
+// 	dest[i] = '\0';
+// 	return (len);
+// }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
