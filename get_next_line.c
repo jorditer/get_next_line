@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/10/08 22:37:10 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/29 16:43:44 by jterrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	main(void)
 	// result = get_next_line(fd);
 	// ft_putstr(result);
 	// free(result);
+	// result = get_next_line(NULL);
 	while (1)
 	{
 		result = get_next_line(fd);
@@ -111,9 +112,9 @@ int	main(void)
 		ft_putstr(result);
 		free(result);
 	}
-	// result = get_next_line(fd);
-	// ft_putstr(result);
-	// free(result);
+	result = get_next_line(fd);
+	ft_putstr(result);
+	free(result);
 	if (close(fd) == -1)
 	{
 		write(2, "Cannot close file.\n", 19);
