@@ -6,7 +6,7 @@
 /*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/10/29 16:43:44 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:22:55 by jterrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,47 +78,56 @@ char	*get_next_line(int fd)
 	}
 	chunk = fill_line(buff, fd, chunk);
 	free(buff);
-	if (!chunk)
+	if (!chunk || chunk[0] == '\0')
 		return (NULL);
 	line = handle_line(&chunk);
 	return (line);
 }
 
-void	ft_putstr(char *s)
-{
-	while (*s)
-	{
-		write(1, s, 1);
-		s++;
-	}
-}
-int	main(void)
-{
-	int		fd;
-	char	*result;
+// void	ft_putstr(char *s)
+// {
+// 	while (*s)
+// 	{
+// 		write(1, s, 1);
+// 		s++;
+// 	}
+// }
+// int main() {
+//     int fd = open("test.txt", O_RDONLY);
+//     char *result;
 
-	fd = open("test.txt", O_RDONLY);
-	if (fd == -1)
-		return (1);
-	// result = get_next_line(fd);
-	// ft_putstr(result);
-	// free(result);
-	// result = get_next_line(NULL);
-	while (1)
-	{
-		result = get_next_line(fd);
-		if  (!result)
-			break ;
-		ft_putstr(result);
-		free(result);
-	}
-	result = get_next_line(fd);
-	ft_putstr(result);
-	free(result);
-	if (close(fd) == -1)
-	{
-		write(2, "Cannot close file.\n", 19);
-		return (1);
-	}
-	return (0);
-}
+//     if (fd < 0) {
+//         perror("Error opening file");
+//         return 1;
+//     }
+// 	// while (1)
+// 	// {
+// 	// 	result = get_next_line(fd);
+// 	// 	if  (!result)
+// 	// 		break ;
+// 	// 	ft_putstr(result);
+// 	// 	free(result);
+// 	// }
+//     result = get_next_line(fd);
+//     if (!result) {
+//         ft_putstr("NULL 1\n");
+//         return 1;
+//     }
+//     ft_putstr(result);
+//     free(result);
+
+//     result = get_next_line(fd);
+//     if (!result) {
+//         ft_putstr("NULL 2\n");
+//         return 1;
+//     }
+//     ft_putstr(result);
+//     free(result);
+
+//     if (close(fd) == -1) {
+//         write(2, "Cannot close file.\n", 19);
+//         return 1;
+//     }
+
+//     return 0;
+// }
