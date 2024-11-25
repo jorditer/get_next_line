@@ -6,7 +6,7 @@
 /*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/11/25 16:02:06 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:45:55 by jterrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,14 @@ char	*handle_line(char **chunk)
 	return (line);
 }
 
+// #include <stdio.h>
 char	*get_next_line(int fd)
 {
 	char		*buff;
 	static char	*chunk;
 	char		*line;
 
+	// printf("\n%d", BUFFER_SIZE);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
@@ -110,7 +112,7 @@ char	*get_next_line(int fd)
 // 	}
 //     result = get_next_line(fd);
 //     if (!result) {
-//         ft_putstr("NULL 1\n");
+//         ft_putstr("\nNULL 1\n");
 //         return 1;
 //     }
 //     ft_putstr(result);
@@ -118,7 +120,7 @@ char	*get_next_line(int fd)
 
 //     result = get_next_line(fd);
 //     if (!result) {
-//         ft_putstr("NULL 2\n");
+//         ft_putstr("\nNULL 2\n");
 //         return 2;
 //     }
 //     ft_putstr(result);
