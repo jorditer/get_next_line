@@ -6,7 +6,7 @@
 /*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:04:10 by jterrada          #+#    #+#             */
-/*   Updated: 2024/11/25 14:01:17 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:10:51 by jterrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,32 @@ char	*ft_strjoin(char *s1, char *s2)
 		s3[i++] = *s2++;
 	s3[i] = '\0';
 	return (s3);
+}
+char *ft_strncpy(char *dest, const char *src, size_t n) {
+    size_t i;
+
+    for (i = 0; i < n && src[i] != '\0'; i++) {
+        dest[i] = src[i];
+    }
+    for (; i < n; i++) {
+        dest[i] = '\0';
+    }
+    return dest;
+}
+void *ft_memmove(void *dest, const void *src, size_t n) {
+    unsigned char *d = dest;
+    const unsigned char *s = src;
+
+    if (d < s) {
+        while (n--) {
+            *d++ = *s++;
+        }
+    } else {
+        d += n;
+        s += n;
+        while (n--) {
+            *--d = *--s;
+        }
+    }
+    return dest;
 }
