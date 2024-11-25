@@ -6,7 +6,7 @@
 /*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/11/24 16:22:55 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:18:46 by jterrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,14 @@ char	*get_next_line(int fd)
 //         perror("Error opening file");
 //         return 1;
 //     }
-// 	// while (1)
-// 	// {
-// 	// 	result = get_next_line(fd);
-// 	// 	if  (!result)
-// 	// 		break ;
-// 	// 	ft_putstr(result);
-// 	// 	free(result);
-// 	// }
+// 	while (1)
+// 	{
+// 		result = get_next_line(fd);
+// 		if  (!result)
+// 			break ;
+// 		ft_putstr(result);
+// 		free(result);
+// 	}
 //     result = get_next_line(fd);
 //     if (!result) {
 //         ft_putstr("NULL 1\n");
@@ -119,7 +119,7 @@ char	*get_next_line(int fd)
 //     result = get_next_line(fd);
 //     if (!result) {
 //         ft_putstr("NULL 2\n");
-//         return 1;
+//         return 2;
 //     }
 //     ft_putstr(result);
 //     free(result);

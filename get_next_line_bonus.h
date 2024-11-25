@@ -6,7 +6,7 @@
 /*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:37:19 by jterrada          #+#    #+#             */
-/*   Updated: 2024/11/25 13:37:59 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:00:54 by jterrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-char	*get_next_line_bonus(int fd);
+char	*get_next_line(int fd);
 int		ft_strlen(char *str);
 char	*ft_strdup(const char *src);
 char	*ft_substr(char *s, int start, int len);
