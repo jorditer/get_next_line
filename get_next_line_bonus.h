@@ -6,14 +6,14 @@
 /*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:37:19 by jterrada          #+#    #+#             */
-/*   Updated: 2024/11/25 14:00:54 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:00:50 by jterrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE 42
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
 # endif
 
 # include <stdlib.h>

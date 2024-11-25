@@ -6,7 +6,7 @@
 /*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/11/25 14:18:46 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:02:06 by jterrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*fill_line(char *buff, int fd, char *chunk)
 
 	while (1)
 	{
-		n = read(fd, buff, BUFF_SIZE);
+		n = read(fd, buff, BUFFER_SIZE);
 		if (n == -1)
 		{
 			free(chunk);
@@ -68,10 +68,10 @@ char	*get_next_line(int fd)
 	static char	*chunk;
 	char		*line;
 
-	buff = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
-	if (fd < 0 || BUFF_SIZE <= 0 || read(fd, buff, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buff, 0) < 0)
 	{
 		free(buff);
 		return (NULL);
