@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:30:35 by jterrada          #+#    #+#             */
-/*   Updated: 2024/11/25 16:06:41 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:46:18 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@
 
 static char	*read_and_store(int fd, char *chunk)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	char	*tmp;
 	ssize_t	bytes_read;
 
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	bytes_read = 1;
 	while (bytes_read > 0)
 	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
+			return (free(buffer), free(chunk), NULL);
 		buffer[bytes_read] = '\0';
 		if (!chunk)
 			chunk = ft_strdup("");
@@ -32,7 +38,7 @@ static char	*read_and_store(int fd, char *chunk)
 		if (ft_strchr(chunk, '\n'))
 			break ;
 	}
-	return (chunk);
+	return (free(buffer), chunk);
 }
 
 static char	*extract_line(char **chunk)

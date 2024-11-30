@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jterrada <jterrada@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/11/25 16:45:55 by jterrada         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:43:15 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,19 @@ char	*fill_line(char *buff, int fd, char *chunk)
 	{
 		n = read(fd, buff, BUFFER_SIZE);
 		if (n == -1)
-		{
-			free(chunk);
-			return (NULL);
-		}
+			return (free(chunk), NULL);
 		if (n == 0)
+		{
+			if (chunk && chunk[0] == '\0')
+				return (free(chunk), NULL);
 			break ;
+		}
 		buff[n] = '\0';
 		if (!chunk)
 			chunk = ft_strdup("");
 		tmp = chunk;
 		chunk = ft_strjoin(tmp, buff);
 		free(tmp);
-		if (!chunk)
-			return (NULL);
 		if (ft_strchr(chunk, '\n'))
 			break ;
 	}
@@ -50,8 +49,8 @@ char	*handle_line(char **chunk)
 	newline_pos = ft_strchr(*chunk, '\n');
 	if (newline_pos)
 	{
-		line = ft_substr(*chunk, 0, newline_pos - *chunk + 1);
 		left = ft_strdup(newline_pos + 1);
+		line = ft_substr(*chunk, 0, (newline_pos - *chunk) + 1);
 		free(*chunk);
 		*chunk = left;
 		return (line);
@@ -62,25 +61,26 @@ char	*handle_line(char **chunk)
 	return (line);
 }
 
-// #include <stdio.h>
 char	*get_next_line(int fd)
 {
 	char		*buff;
 	static char	*chunk;
 	char		*line;
 
-	// printf("\n%d", BUFFER_SIZE);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buff, 0) < 0)
 	{
 		free(buff);
+		if (chunk)
+			free(chunk);
+		chunk = NULL;
 		return (NULL);
 	}
 	chunk = fill_line(buff, fd, chunk);
 	free(buff);
-	if (!chunk || chunk[0] == '\0')
+	if (!chunk)
 		return (NULL);
 	line = handle_line(&chunk);
 	return (line);
