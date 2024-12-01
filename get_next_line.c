@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 11:28:59 by jterrada          #+#    #+#             */
-/*   Updated: 2024/12/01 23:03:00 by jordi            ###   ########.fr       */
+/*   Updated: 2024/12/01 23:32:39 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*fill_line(char *buff, int fd, char *chunk)
 		tmp = chunk;
 		chunk = ft_strjoin(tmp, buff);
 		free(tmp);
-		if (ft_strchr(chunk, '\n'))
+		if (!chunk || ft_strchr(chunk, '\n'))
 			break ;
 	}
 	if (!chunk || chunk[0] == '\0')

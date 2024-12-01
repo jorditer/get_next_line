@@ -6,7 +6,7 @@
 /*   By: jordi <jordi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:30:35 by jterrada          #+#    #+#             */
-/*   Updated: 2024/12/01 23:10:21 by jordi            ###   ########.fr       */
+/*   Updated: 2024/12/01 23:45:20 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static char	*read_and_store(int fd, char *chunk)
 		buffer[bytes_read] = '\0';
 		if (!chunk)
 			chunk = ft_strdup("");
+		if (!chunk)
+			return (free(buffer), NULL);
 		tmp = chunk;
 		chunk = ft_strjoin(tmp, buffer);
 		free(tmp);
 		if (!chunk || ft_strchr(chunk, '\n'))
 			break ;
 	}
-	if (!chunk || !tmp)
-		return (NULL);
 	return (free(buffer), chunk);
 }
 
